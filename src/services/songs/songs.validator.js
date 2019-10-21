@@ -2,14 +2,17 @@ const Joi = require('joi');
 const Validate = require('../..//utils/validate');
 
 const SCHEMA = {
-  name: Joi.string()
-    .label('name')
+  title: Joi.string()
+    .label('title')
     .required(),
   author: Joi.string()
     .label('author')
     .required(),
   youtubeid: Joi.string()
     .label('youtubeid')
+    .required(),
+  language: Joi.string()
+    .label('language')
     .required(),
   year: Joi.number()
     .label('year')

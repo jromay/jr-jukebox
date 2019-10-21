@@ -8,5 +8,8 @@ module.exports = function(app) {
     autoload: true
   });
 
+  Model.ensureIndex({ fieldName: 'title', unique: true });
+  Model.ensureIndex({ fieldName: 'file', unique: true });
+
   return Model;
 };
