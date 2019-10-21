@@ -11,7 +11,7 @@ module.exports = (options = {}) => {
       context.params.query.initialAuthor = arrayToOrSyntax(context.params.query.initialAuthor);
     }
     if (context.params.query.decade) {
-      context.params.query.decade = arrayToOrSyntax(context.params.query.decade);
+      context.params.query.decade = arrayToOrSyntax(context.params.query.decade, true);
     }
     if (context.params.query.language) {
       context.params.query.language = arrayToOrSyntax(context.params.query.language);
@@ -28,10 +28,22 @@ module.exports = (options = {}) => {
   };
 };
 
-function arrayToOrSyntax(array) {
+function arrayToOrSyntax(array, convertInt) {
   if (typeof array === 'string') {
-    return array;
+    if (convertInt) {
+      return +array;
+    } else {
+      return array;
+    }
   } else {
-    return { $in: array };
+    if (convertInt) {
+      let array2 = [];
+      array.forEach(element => {
+        array2.push(+element);
+      });
+      return { $in: array2 };
+    } else {
+      return { $in: array };
+    }
   }
 }
