@@ -1,4 +1,3 @@
-const SongValidator = require('../services/songs/songs.validator');
 const fs = require('fs');
 const ytdl = require('ytdl-core');
 
@@ -11,10 +10,6 @@ module.exports = (options = {}) => {
   return async context => {
     try {
       const { data } = context;
-      let validation = await SongValidator.songValidator(data);
-      if (validation !== true) {
-        throw new Error(validation.message);
-      }
       ytdl('http://www.youtube.com/watch?v=' + data.youtubeid, { filter: format => format.container === 'mp4', quality: 'highest' }).pipe(
         fs.createWriteStream('public/videos/' + data.year + '/' + data.youtubeid + '.mp4')
       );

@@ -8,12 +8,37 @@ const translateQuerySongs = require('../../hooks/translate-query-songs');
 
 const checkNewLanguage = require('../../hooks/check-new-language');
 
+const validator = require('../../hooks/validator');
+
+const Joi = require('joi');
+
+const SCHEMA = {
+  title: Joi.string()
+    .label('title')
+    .required(),
+  author: Joi.string()
+    .label('author')
+    .required(),
+  youtubeid: Joi.string()
+    .label('youtubeid')
+    .required(),
+  language: Joi.string()
+    .label('language')
+    .required(),
+  year: Joi.number()
+    .label('year')
+    .required(),
+  tags: Joi.array()
+    .label('tags')
+    .required()
+};
+
 module.exports = {
   before: {
     all: [],
     find: [translateQuerySongs()],
     get: [],
-    create: [checkPath(), downloadVideo()],
+    create: [validator(SCHEMA), checkPath(), downloadVideo()],
     update: [],
     patch: [],
     remove: []
