@@ -16,14 +16,21 @@ module.exports = (options = {}) => {
     if (context.params.query.language) {
       context.params.query.language = arrayToOrSyntax(context.params.query.language);
     }
+    if (context.params.query.tags) {
+      context.params.query['$or'] = [];
+      for (let x = 1; x <= 4; x++) {
+        context.params.query['$or'].push(JSON.parse('{ "tag' + x + '": ' + JSON.stringify(arrayToOrSyntax(context.params.query.tags)) + '}'));
+      }
+      delete context.params.query.tags;
+    }
     context.params.query['$sort'] = { title: 1 };
     return context;
   };
 };
 
 function arrayToOrSyntax(array) {
-  if (array.length == 1) {
-    return array[0];
+  if (typeof array === 'string') {
+    return array;
   } else {
     return { $in: array };
   }
