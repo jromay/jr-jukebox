@@ -4,26 +4,27 @@
 // eslint-disable-next-line no-unused-vars
 module.exports = (options = {}) => {
   return async context => {
-    if (context.params.query.initialTitle) {
-      context.params.query.initialTitle = arrayToOrSyntax(context.params.query.initialTitle);
-    }
-    if (context.params.query.initialAuthor) {
-      context.params.query.initialAuthor = arrayToOrSyntax(context.params.query.initialAuthor);
-    }
-    if (context.params.query.decade) {
-      context.params.query.decade = arrayToOrSyntax(context.params.query.decade, true);
-    }
-    if (context.params.query.language) {
-      context.params.query.language = arrayToOrSyntax(context.params.query.language);
-    }
-    if (context.params.query.tags) {
-      context.params.query['$or'] = [];
-      for (let x = 1; x <= 4; x++) {
-        context.params.query['$or'].push(JSON.parse('{ "tag' + x + '": ' + JSON.stringify(arrayToOrSyntax(context.params.query.tags)) + '}'));
+    if (context.params.query) {
+      if (context.params.query.initialTitle) {
+        context.params.query.initialTitle = arrayToOrSyntax(context.params.query.initialTitle);
       }
-      delete context.params.query.tags;
+      if (context.params.query.initialAuthor) {
+        context.params.query.initialAuthor = arrayToOrSyntax(context.params.query.initialAuthor);
+      }
+      if (context.params.query.decade) {
+        context.params.query.decade = arrayToOrSyntax(context.params.query.decade, true);
+      }
+      if (context.params.query.language) {
+        context.params.query.language = arrayToOrSyntax(context.params.query.language);
+      }
+      if (context.params.query.tags) {
+        context.params.query['$or'] = [];
+        for (let x = 1; x <= 4; x++) {
+          context.params.query['$or'].push(JSON.parse('{ "tag' + x + '": ' + JSON.stringify(arrayToOrSyntax(context.params.query.tags)) + '}'));
+        }
+        delete context.params.query.tags;
+      }
     }
-    context.params.query['$sort'] = { title: 1 };
     return context;
   };
 };
