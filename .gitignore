@@ -110,3 +110,27 @@ $RECYCLE.BIN/
 lib/
 data/
 public/videos/
+
+
+# Front project
+# dependencies
+jr-jukebox-front/node_modules
+jr-jukebox-front/.pnp
+jr-jukebox-front.pnp.js
+
+# testing
+jr-jukebox-front/coverage
+
+# production
+jr-jukebox-front/build
+
+# misc
+jr-jukebox-front.DS_Store
+jr-jukebox-front.env.local
+jr-jukebox-front.env.development.local
+jr-jukebox-front.env.test.local
+jr-jukebox-front.env.production.local
+
+jr-jukebox-frontnpm-debug.log*
+jr-jukebox-frontyarn-debug.log*
+jr-jukebox-frontyarn-error.log*

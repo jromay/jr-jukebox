@@ -1,0 +1,9 @@
+.optioncontainer{
+  justify-content: center;
+  text-align:center;
+  border-bottom-style: groove;
+}
+
+.optioncontainer > a {
+  margin: 3px;
+}
