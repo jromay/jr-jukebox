@@ -9,7 +9,7 @@ export const managedList = (state = {}, action) => {
       return { ...state, list: list };
     }
     case ADD_SONG: {
-      const { song } = action.payload;
+      const song = action.payload;
       return { ...state, list: [...state.list, song] };
     }
     case EXCHANGE_POSITIONS: {

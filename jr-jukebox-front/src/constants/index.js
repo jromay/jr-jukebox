@@ -4,6 +4,8 @@ export const DECADES = 'decades';
 
 export const LETTERS = 'letters';
 
+export const LANGUAGES = 'languages';
+
 export const LETTERS_OPTIONS = [
   {
     _id: 'L1',

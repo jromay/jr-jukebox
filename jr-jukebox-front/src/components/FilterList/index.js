@@ -5,7 +5,7 @@ import React from 'react';
 
 import FilterSelector from './FilterSelector';
 
-const FilterList = ({ options, onSelectedOption, onUnselectedOption, colorOn, colorOff }) => {
+const FilterList = ({ options, onSelectedOption, onUnselectedOption, colorOn, colorOff, flag }) => {
   const optionsToComponent = options => {
     return options.map(option => (
       <FilterSelector
@@ -15,6 +15,7 @@ const FilterList = ({ options, onSelectedOption, onUnselectedOption, colorOn, co
         active={option.selected}
         action={option.selected ? () => onUnselectedOption(option.name) : () => onSelectedOption(option.name)}
         color={option.selected ? colorOn : colorOff}
+        flag={flag}
       />
     ));
   };
@@ -27,7 +28,8 @@ FilterList.propTypes = {
   onSelectedOption: PropTypes.func.isRequired,
   onUnselectedOption: PropTypes.func.isRequired,
   colorOn: PropTypes.string.isRequired,
-  colorOff: PropTypes.string.isRequired
+  colorOff: PropTypes.string.isRequired,
+  flag: PropTypes.bool
 };
 
 export default FilterList;

@@ -1,4 +1,5 @@
 const validator = require('../../hooks/validator');
+const removeOldList = require('../../hooks/removeOldList');
 
 const Joi = require('joi');
 
@@ -18,7 +19,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [validator(SCHEMA)],
+    create: [validator(SCHEMA), removeOldList()],
     update: [validator(SCHEMA)],
     patch: [validator(SCHEMA)],
     remove: []

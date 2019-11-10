@@ -5,9 +5,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #c4c9e8;
+  background-image: url('./bg.png');
+  background-position-x: 50%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+} 
+
+label{
+  font-family: Jukebox !important;
+  font-size: xx-large !important;
+}
+
+option, select, input{
+  font-family: Jukebox !important;
+  font-size: xx-large !important;
 }

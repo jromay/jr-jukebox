@@ -1,16 +1,18 @@
 import './App.css';
 import 'typeface-roboto';
 
-import Paper from 'material-ui/Paper';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React, { Component } from 'react';
 import { Col, Grid, Row } from 'react-flexbox-grid';
-import ReactPlayer from 'react-player';
 
 import { setOptions } from './actions';
-import { DECADES, LETTERS, TAGS } from './constants';
+import { DECADES, LANGUAGES, LETTERS, TAGS } from './constants';
+import FilteredListContainer from './containers/FilteredListContainer';
 import FilterListContainer from './containers/FilterListContainer';
-import { getOptions } from './reducers';
+import PersonalListsContainer from './containers/PersonalListsContainer';
+import PlayerContainer from './containers/PlayerContainer';
+import SavePersonalListContainer from './containers/SavePersonalListContainer';
+import SelectedListContainer from './containers/SelectedListContainer';
 
 class App extends Component {
   constructor(props) {
@@ -18,37 +20,41 @@ class App extends Component {
     setOptions(TAGS);
     setOptions(DECADES);
     setOptions(LETTERS);
+    setOptions(LANGUAGES);
   }
   render() {
     return (
       <MuiThemeProvider>
         <Grid>
-          <Row>
-            <Col xs={4}></Col>
-            <Col xs={4}>
-              <ReactPlayer controls={true} url="https://www.youtube.com/watch?v=oZ5tUAikti" playing width="100%" height="250px" />
+          <Row className="padding-top-40">
+            <Col xs={12}>
+              <PlayerContainer />
             </Col>
-            <Col xs={4}></Col>
           </Row>
           <Row>
             <Col xs={8}>
               <FilterListContainer></FilterListContainer>
               <Row>
-                <Col xs={12}>FilteredList</Col>
-              </Row>
-              <Row>
-                <Col xs={12}>Acciones</Col>
+                <Col xs={12}>
+                  <FilteredListContainer />
+                </Col>
               </Row>
             </Col>
             <Col xs={4}>
-              <Row>
-                <Paper zDepth={4}>Lista</Paper>
+              <Row className="background-color padding-top-15">
+                <Col xs={12}>
+                  <SelectedListContainer />
+                </Col>
               </Row>
               <Row>
-                <Paper zDepth={4}>Combo listas</Paper>
+                <Col xs={12}>
+                  <PersonalListsContainer />
+                </Col>
               </Row>
               <Row>
-                <Paper zDepth={4}>Formulario grabar lista</Paper>
+                <Col xs={12}>
+                  <SavePersonalListContainer />
+                </Col>
               </Row>
             </Col>
           </Row>

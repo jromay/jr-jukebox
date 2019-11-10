@@ -1,34 +1,61 @@
 import { combineReducers } from 'redux';
 import { createSelector } from 'reselect';
 
-import { DECADES, LETTERS, TAGS } from './../constants';
+import { DECADES, LANGUAGES, LETTERS, TAGS } from './../constants';
 import { filteredList, getFilteredList as _getFilteredList } from './filteredList';
-import { filters, getDecades as _getDecades, getLetters as _getLetters, getTags as _getTags } from './filters';
+import { filters, getDecades as _getDecades, getLanguages as _getLanguages, getLetters as _getLetters, getTags as _getTags } from './filters';
 import { getManagedList as _getManagedList, managedList } from './managedList';
-import { getPersonalLists as _getPersonalLists, personalLists } from './personalLists';
-import { getActualList as _getActualList, getActualSong as _getActualSong, playList } from './playList';
+import {
+  getActualIndex as _getActualIndex,
+  getActualList as _getActualList,
+  getActualSong as _getActualSong,
+  getPersonalLists as _getPersonalLists,
+  personalLists
+} from './personalLists';
 
 export default combineReducers({
-  playList,
-  managedList,
   filteredList,
   personalLists,
   filters
 });
 
 export const getActualSong = createSelector(
-  state => state.playList,
+  state => state.personalLists,
   _getActualSong
+);
+export const getActualIndex = createSelector(
+  state => state.personalLists,
+  _getActualIndex
 );
 
 export const getActualList = createSelector(
-  state => state.playList,
+  state => state.personalLists,
   _getActualList
 );
 
-export const getManagedList = createSelector(
+/*export const getManagedList = createSelector(
   state => state.managedList,
   _getManagedList
+);*/
+
+export const getPersonalLists = createSelector(
+  state => state.personalLists,
+  _getPersonalLists
+);
+
+export const getPersonalList = createSelector(
+  state => state.personalLists,
+  personalLists => personalLists.listId || ''
+);
+
+export const getSelectedListContent = createSelector(
+  state => state.personalLists,
+  personalLists => personalLists.listContent || []
+);
+
+export const getNameList = createSelector(
+  state => state.personalLists,
+  personalLists => personalLists.nameList || ''
 );
 
 export const getDecades = createSelector(
@@ -46,10 +73,16 @@ export const getLetters = createSelector(
   _getLetters
 );
 
+export const getLanguages = createSelector(
+  state => state.filters,
+  _getLanguages
+);
+
 export const getOptions = state => {
   const tags = TAGS;
   const decades = DECADES;
   const letters = LETTERS;
+  const languages = LANGUAGES;
   return optionType => {
     switch (optionType) {
       case tags:
@@ -58,8 +91,20 @@ export const getOptions = state => {
         return getDecades(state);
       case letters:
         return getLetters(state);
+      case languages:
+        return getLanguages(state);
       default:
         break;
     }
   };
 };
+
+export const getFilterQuery = createSelector(
+  state => state.filters,
+  filters => filters.query || ''
+);
+
+export const getFilteredList = createSelector(
+  state => state.filteredList,
+  filteredList => filteredList.list || []
+);

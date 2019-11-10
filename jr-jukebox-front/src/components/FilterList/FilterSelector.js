@@ -1,7 +1,7 @@
 import Fab from '@material-ui/core/Fab';
-import { pseudoRandomBytes } from 'crypto';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import Flag from 'react-world-flags';
 
 class FilterSelector extends Component {
   constructor(props) {
@@ -18,11 +18,11 @@ class FilterSelector extends Component {
         variant="extended"
         size="medium"
         component="a"
-        className={'MuiFab-' + this.props.color}
+        className={'MuiFab-' + this.props.color + ' jukebox-family'}
         onClick={this.props.action}
         clickable="true"
       >
-        {this.props.label}
+        {this.props.flag ? <Flag code={this.props.label} height="16" /> : this.props.label}
       </Fab>
     );
   }
@@ -33,7 +33,8 @@ FilterSelector.propTypes = {
   label: PropTypes.string.isRequired,
   active: PropTypes.bool.isRequired,
   action: PropTypes.func.isRequired,
-  color: PropTypes.string.isRequired
+  color: PropTypes.string.isRequired,
+  flag: PropTypes.bool
 };
 
 export default FilterSelector;
