@@ -1,0 +1,63 @@
+{
+  "name": "jr-jukebox-front",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.5.2",
+    "@material-ui/icons": "^4.5.1",
+    "clsx": "^1.0.4",
+    "dotenv": "^8.2.0",
+    "dotenv-cli": "^3.0.0",
+    "dotenv-expand": "^5.1.0",
+    "fs": "0.0.1-security",
+    "lodash": "^4.17.15",
+    "material-ui": "^0.20.2",
+    "moment": "^2.24.0",
+    "path": "^0.12.7",
+    "prop-types": "^15.7.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-flexbox-grid": "^2.1.2",
+    "react-material-ui-keyboard": "^6.2.1",
+    "react-player": "^1.13.0",
+    "react-redux": "^7.1.1",
+    "react-scripts": "3.2.0",
+    "react-virtualized": "^9.21.1",
+    "react-world-flags": "^1.3.0",
+    "redux": "^4.0.4",
+    "redux-persist": "^6.0.0",
+    "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "reselect-tools": "0.0.7",
+    "typeface-roboto": "0.0.75",
+    "url": "^0.11.0"
+  },
+  "scripts": {
+    "start": "set PORT=91 && react-scripts start",
+    "build": "react-scripts build",
+    "build-dev": "dotenv -e .env.development react-scripts build",
+    "build-prod": "dotenv -e .env.production react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "homepage": "",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "dotenv-cli": "^3.0.0"
+  }
+}
