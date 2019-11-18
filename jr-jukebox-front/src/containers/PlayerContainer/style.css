@@ -1,0 +1,28 @@
+.text-bottom > *{
+  vertical-align: text-bottom;
+}
+.jukebox-family{
+  font-family: Jukebox !important;
+  font-size: 40px !important;
+}
+.right{
+  text-align: end;  
+}
+
+.chipsSelect{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.chipsSelectI{ 
+  margin: 2px;
+}
+
+.formBox{
+  width: 100%;
+  margin:5px !important;
+}
+
+.labelToRight{
+  margin-left: 15px;
+}

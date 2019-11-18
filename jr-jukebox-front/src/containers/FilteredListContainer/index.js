@@ -13,47 +13,45 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as actions from '../../actions';
+import { URL_API } from '../../constants';
 import { getFilteredList, getFilterQuery } from '../../reducers';
 
 const columns = [
   {
-    id: 'title',
-    label: 'Resultados de la búsqueda',
-    minWidth: '80%',
-    pre: '<',
-    post: '>',
-    preHeader: '[',
-    postHeader: ']',
-    class: 'tipo-list padding1',
-    classHeader: 'header-table tipo-header padding1',
-    align: 'center'
+    id: "title",
+    label: "Resultados de la búsqueda",
+    minWidth: "80%",
+    pre: "<",
+    post: ">",
+    preHeader: "[",
+    postHeader: "]",
+    class: "tipo-list padding1",
+    classHeader: "header-table tipo-header padding1",
+    align: "center"
   },
   {
-    id: 'code',
-    label: '',
-    minWidth: '20%',
+    id: "code",
+    label: "",
+    minWidth: "20%",
     pre: 0,
     post: 0,
-    preHeader: '',
-    postHeader: '',
-    class: 'tipo-list padding1',
+    preHeader: "",
+    postHeader: "",
+    class: "tipo-list padding1",
     action: true,
-    align: 'right',
-    classHeader: 'header-table tipo-list padding1'
+    align: "right",
+    classHeader: "header-table tipo-list padding1"
   }
 ];
 
 class FilteredListContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
-    this.loadFilteredList('');
+    this.loadFilteredList("");
   }
 
   loadFilteredList(queryString) {
     const { setFilteredList } = this.props;
-    const url = `${process.env.REACT_APP_API_PROTOCOL}://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/songs/?${queryString}`;
+    const url = `${URL_API}songs/?${queryString}`;
     setFilteredList([]);
     this.loadProcess(url, 50, 0);
   }
@@ -78,7 +76,7 @@ class FilteredListContainer extends Component {
   handleAddSong = song => this.props.addPersonalListContent(song);
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.filterQuery != this.props.filterQuery) {
+    if (nextProps.filterQuery !== this.props.filterQuery) {
       this.loadFilteredList(nextProps.filterQuery);
     }
   }
@@ -88,14 +86,18 @@ class FilteredListContainer extends Component {
   }
 
   render() {
-    const { filterQuery } = this.props;
     return (
       <div className="tableWrapper">
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               {columns.map(column => (
-                <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth }} className={column.classHeader}>
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                  className={column.classHeader}
+                >
                   {column.preHeader + column.label + column.postHeader}
                 </TableCell>
               ))}
@@ -108,7 +110,11 @@ class FilteredListContainer extends Component {
                   {columns.map(column => {
                     const value = column.pre + row[column.id] + column.post;
                     return (
-                      <TableCell key={column.id + row._id} align={column.align} className={column.class}>
+                      <TableCell
+                        key={column.id + row._id}
+                        align={column.align}
+                        className={column.class}
+                      >
                         {column.action ? (
                           <Fab
                             className="padding1"

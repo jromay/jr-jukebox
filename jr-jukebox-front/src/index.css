@@ -15,12 +15,12 @@ code {
     monospace;
 } 
 
-label{
+.playList label{
   font-family: Jukebox !important;
   font-size: xx-large !important;
 }
 
-option, select, input{
+.playList option,.playList  select,.playList  input{
   font-family: Jukebox !important;
   font-size: xx-large !important;
 }

@@ -4,7 +4,6 @@ import { createSelector } from 'reselect';
 import { DECADES, LANGUAGES, LETTERS, TAGS } from './../constants';
 import { filteredList, getFilteredList as _getFilteredList } from './filteredList';
 import { filters, getDecades as _getDecades, getLanguages as _getLanguages, getLetters as _getLetters, getTags as _getTags } from './filters';
-import { getManagedList as _getManagedList, managedList } from './managedList';
 import {
   getActualIndex as _getActualIndex,
   getActualList as _getActualList,
@@ -12,11 +11,13 @@ import {
   getPersonalLists as _getPersonalLists,
   personalLists
 } from './personalLists';
+import { getFormValue as _getFormValue, getSelectedVideo as _getSelectedVideo, getVideoList as _getVideoList, youtubeList } from './searchYoutube';
 
 export default combineReducers({
   filteredList,
   personalLists,
-  filters
+  filters,
+  youtubeList
 });
 
 export const getActualSong = createSelector(
@@ -33,11 +34,6 @@ export const getActualList = createSelector(
   _getActualList
 );
 
-/*export const getManagedList = createSelector(
-  state => state.managedList,
-  _getManagedList
-);*/
-
 export const getPersonalLists = createSelector(
   state => state.personalLists,
   _getPersonalLists
@@ -45,7 +41,7 @@ export const getPersonalLists = createSelector(
 
 export const getPersonalList = createSelector(
   state => state.personalLists,
-  personalLists => personalLists.listId || ''
+  personalLists => personalLists.listId || ""
 );
 
 export const getSelectedListContent = createSelector(
@@ -55,23 +51,14 @@ export const getSelectedListContent = createSelector(
 
 export const getNameList = createSelector(
   state => state.personalLists,
-  personalLists => personalLists.nameList || ''
+  personalLists => personalLists.nameList || ""
 );
 
-export const getDecades = createSelector(
-  state => state.filters,
-  _getDecades
-);
+export const getDecades = createSelector(state => state.filters, _getDecades);
 
-export const getTags = createSelector(
-  state => state.filters,
-  _getTags
-);
+export const getTags = createSelector(state => state.filters, _getTags);
 
-export const getLetters = createSelector(
-  state => state.filters,
-  _getLetters
-);
+export const getLetters = createSelector(state => state.filters, _getLetters);
 
 export const getLanguages = createSelector(
   state => state.filters,
@@ -101,10 +88,25 @@ export const getOptions = state => {
 
 export const getFilterQuery = createSelector(
   state => state.filters,
-  filters => filters.query || ''
+  filters => filters.query || ""
 );
 
 export const getFilteredList = createSelector(
   state => state.filteredList,
-  filteredList => filteredList.list || []
+  _getFilteredList
+);
+
+export const getVideoList = createSelector(
+  state => state.youtubeList,
+  _getVideoList
+);
+
+export const getSelectedVideo = createSelector(
+  state => state.youtubeList,
+  _getSelectedVideo
+);
+
+export const getFormValue = createSelector(
+  state => state.youtubeList,
+  _getFormValue
 );

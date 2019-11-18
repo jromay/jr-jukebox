@@ -5,10 +5,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as actions from '../../actions';
-import { setOptions } from '../../actions';
 import FilterList from '../../components/FilterList';
 import { DECADES, LANGUAGES, LETTERS, TAGS } from '../../constants';
-import { getDecades, getLanguages, getLetters, getOptions, getTags } from './../../reducers';
+import { getOptions } from './../../reducers';
 
 class FilterListContainer extends Component {
   options = [];

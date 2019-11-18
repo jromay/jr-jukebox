@@ -10,15 +10,19 @@ import reducers from './../reducers';
 const initialState = {};
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage: storage,
-  blacklist: ['form', 'modal'],
-  stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
+  blacklist: ["form", "modal"],
+  stateReconciler: autoMergeLevel2
 };
 
 const persistReducers = persistReducer(persistConfig, reducers);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export const store = createStore(reducers, initialState, composeEnhancers(applyMiddleware(promiseMiddleware, thunk)));
+export const store = createStore(
+  reducers,
+  initialState,
+  composeEnhancers(applyMiddleware(promiseMiddleware, thunk))
+);
 export const persistor = persistStore(store);

@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as actions from '../../actions';
+import { URL_API } from '../../constants';
 import { getPersonalList, getPersonalLists } from '../../reducers';
 
 class PersonalListsContainer extends Component {
@@ -17,8 +18,8 @@ class PersonalListsContainer extends Component {
   }
 
   loadPersonalLists() {
-    const { setPersonalLists, setPersonalList } = this.props;
-    const url = `${process.env.REACT_APP_API_PROTOCOL}://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/lists/?`;
+    const { setPersonalLists } = this.props;
+    const url = `${URL_API}lists/?`;
     setPersonalLists([]);
 
     this.loadProcess(url, 50, 0);
@@ -40,8 +41,8 @@ class PersonalListsContainer extends Component {
   loadSelectedLists(id) {
     const { setPersonalListContent } = this.props;
     setPersonalListContent([]);
-    if (id !== '') {
-      const url = `${process.env.REACT_APP_API_PROTOCOL}://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/lists/${id}`;
+    if (id !== "") {
+      const url = `${URL_API}lists/${id}`;
       fetch(url)
         .then(data => data.json())
         .then(data => {
@@ -53,10 +54,10 @@ class PersonalListsContainer extends Component {
   handleChange = name => event => {
     const { setPersonalList, setNameList } = this.props;
     setPersonalList(event.target.value);
-    if (event.target.value !== '') {
+    if (event.target.value !== "") {
       setNameList(event.target.selectedOptions[0].label);
     } else {
-      setNameList('');
+      setNameList("");
     }
     this.loadSelectedLists(event.target.value);
   };
@@ -64,12 +65,16 @@ class PersonalListsContainer extends Component {
   componentDidMount() {}
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedId !== '' && nextProps.selectedId !== this.props.selectedId) {
+    if (
+      nextProps.selectedId !== "" &&
+      nextProps.selectedId !== this.props.selectedId
+    ) {
       let reload = true;
       this.props.personalLists.map(list => {
         if (list._id === nextProps.selectedId) {
           reload = false;
         }
+        return reload;
       });
       if (reload) {
         this.loadPersonalLists();
@@ -81,21 +86,29 @@ class PersonalListsContainer extends Component {
     return (
       <Row>
         <Col xs={12}>
-          <FormControl variant="filled" className="padding-top-15 min-width-100" width="100%">
-            <InputLabel htmlFor="filled-lists">{'[Mis Listas]'}</InputLabel>
+          <FormControl
+            variant="filled"
+            className="padding-top-15 min-width-100"
+            width="100%"
+          >
+            <InputLabel htmlFor="filled-lists">{"[Mis Listas]"}</InputLabel>
             <Select
               native
               value={this.props.selectedId}
-              onChange={this.handleChange('list')}
+              onChange={this.handleChange("list")}
               inputProps={{
-                name: 'Mi Lista',
-                id: 'filled-lists'
+                name: "Mi Lista",
+                id: "filled-lists"
               }}
               width="100%"
             >
               <option value="" />
               {this.props.personalLists.map(list => {
-                return <option value={list._id}>{list.title}</option>;
+                return (
+                  <option value={list._id} key={list._id}>
+                    {list.title}
+                  </option>
+                );
               })}
             </Select>
           </FormControl>

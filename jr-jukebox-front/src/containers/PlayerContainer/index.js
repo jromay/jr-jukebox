@@ -3,7 +3,6 @@ import './style.css';
 import Fab from '@material-ui/core/Fab';
 import FastForwardIcon from '@material-ui/icons/FastForward';
 import FastRewindIcon from '@material-ui/icons/FastRewind';
-import * as _collection from 'lodash/collection';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Col, Grid, Row } from 'react-flexbox-grid';
@@ -11,20 +10,21 @@ import ReactPlayer from 'react-player';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as actions from '../actions';
-import { getActualIndex, getActualList, getActualSong } from '../reducers';
+import * as actions from '../../actions';
+import { URL_API } from '../../constants';
+import { getActualIndex, getActualList, getActualSong } from '../../reducers';
 
 class PlayerContainer extends Component {
   prevName() {
     const { actualIndex, playList } = this.props;
     if (playList && playList.length > 0) {
       if (actualIndex > 0) {
-        return '{' + playList[actualIndex - 1].title + '}';
+        return "{" + playList[actualIndex - 1].title + "}";
       } else {
-        return '{' + playList[playList.length - 1].title + '}';
+        return "{" + playList[playList.length - 1].title + "}";
       }
     } else {
-      return '{}';
+      return "{}";
     }
   }
 
@@ -32,27 +32,25 @@ class PlayerContainer extends Component {
     const { actualIndex, playList } = this.props;
     if (playList && playList.length > 0) {
       if (actualIndex < playList.length - 1) {
-        return '{' + playList[actualIndex + 1].title + '}';
+        return "{" + playList[actualIndex + 1].title + "}";
       } else {
-        return '{' + playList[0].title + '}';
+        return "{" + playList[0].title + "}";
       }
     } else {
-      return '{}';
+      return "{}";
     }
   }
 
   playNextSong() {
-    const { actualIndex, playList, nextSong } = this.props;
+    const { playList, nextSong } = this.props;
     if (playList) {
-      //} && actualIndex < playList.length - 1) {
       nextSong();
     }
   }
 
   playPrevSong() {
-    const { actualIndex, playList, prevSong } = this.props;
+    const { playList, prevSong } = this.props;
     if (playList) {
-      // && actualIndex > 0) {
       prevSong();
     }
   }
@@ -88,11 +86,11 @@ class PlayerContainer extends Component {
               className="player"
               controls={true}
               url={
-                `${process.env.REACT_APP_API_PROTOCOL}://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/videos/` +
-                (actualSong.year || '') +
-                '/' +
-                (actualSong.file || '') +
-                '.mp4'
+                `${URL_API}videos/` +
+                (actualSong.year || "") +
+                "/" +
+                (actualSong.file || "") +
+                ".mp4"
               }
               playing
               width="calc(100%-50px)"
@@ -131,8 +129,8 @@ class PlayerContainer extends Component {
 
 PlayerContainer.propTypes = {
   playList: PropTypes.array.isRequired,
-  actualSong: PropTypes.object.isRequired,
-  actualIndex: PropTypes.number.isRequired
+  actualSong: PropTypes.object,
+  actualIndex: PropTypes.number
 };
 
 function mapStateToProps(state) {
@@ -145,7 +143,4 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PlayerContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer);

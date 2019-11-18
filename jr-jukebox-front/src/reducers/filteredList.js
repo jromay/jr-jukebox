@@ -19,5 +19,5 @@ export const filteredList = (state = {}, action) => {
 
 export const getFilteredList = createSelector(
   state => state.list,
-  list => list
+  list => list || []
 );

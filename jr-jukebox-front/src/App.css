@@ -46,3 +46,16 @@
 .background-color{
   background-color: #c4c9e8 !important;
 }
+
+.min-height-40 {
+  min-height:120px;
+  padding-top: 30px;
+}
+
+.progress{
+  width: 90%;
+  margin-top:15px;
+  padding-top:10px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}

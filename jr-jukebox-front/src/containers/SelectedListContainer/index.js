@@ -19,38 +19,31 @@ import { getActualIndex, getPersonalList, getSelectedListContent } from '../../r
 
 const columns = [
   {
-    id: 'title',
-    label: 'Lista de Reproducción',
-    minWidth: '80%',
-    pre: '<',
-    post: '>',
-    preHeader: '[',
-    postHeader: ']',
-    class: 'tipo-list padding1',
-    classHeader: 'header-table tipo-header padding1',
-    align: 'center'
+    id: "title",
+    label: "Lista de Reproducción",
+    minWidth: "80%",
+    pre: "<",
+    post: ">",
+    preHeader: "[",
+    postHeader: "]",
+    class: "tipo-list padding1",
+    classHeader: "header-table tipo-header padding1",
+    align: "center"
   },
   {
-    id: 'code',
-    label: '',
-    minWidth: '20%',
+    id: "code",
+    label: "",
+    minWidth: "20%",
     pre: 0,
     post: 0,
-    preHeader: '',
-    postHeader: '',
-    class: 'tipo-list padding1',
+    preHeader: "",
+    postHeader: "",
+    class: "tipo-list padding1",
     action: true,
-    align: 'right',
-    classHeader: 'header-table tipo-list padding1'
+    align: "right",
+    classHeader: "header-table tipo-list padding1"
   }
 ];
-
-function createData(name, code) {
-  const buttons = code + ' botones';
-  return { name, code: buttons };
-}
-
-const rows = [];
 
 class SelectedListContainer extends Component {
   handleExchangePosition = index => this.props.exchangePositions(index);
@@ -70,7 +63,9 @@ class SelectedListContainer extends Component {
                   className={columns[0].classHeader}
                   colSpan="2"
                 >
-                  {columns[0].preHeader + columns[0].label + columns[0].postHeader}
+                  {columns[0].preHeader +
+                    columns[0].label +
+                    columns[0].postHeader}
                 </TableCell>
               }
             </TableRow>
@@ -78,11 +73,23 @@ class SelectedListContainer extends Component {
           <TableBody>
             {this.props.selectedListContent.map((row, index) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code} className={index == this.props.selectedIndex ? 'selected' : ''}>
+                <TableRow
+                  hover
+                  role="checkbox"
+                  tabIndex={-1}
+                  key={row.file}
+                  className={
+                    index === this.props.selectedIndex ? "selected" : ""
+                  }
+                >
                   {columns.map(column => {
                     const value = column.pre + row[column.id] + column.post;
                     return (
-                      <TableCell key={column.id} align={column.align} className={column.class + ' padding1'}>
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        className={column.class + " padding1"}
+                      >
                         {column.action ? (
                           <Fab
                             className="padding1"
@@ -111,7 +118,11 @@ class SelectedListContainer extends Component {
                             variant="extended"
                             aria-label="like"
                             color="primary"
-                            disabled={index < this.props.selectedListContent.length - 1 ? false : true}
+                            disabled={
+                              index < this.props.selectedListContent.length - 1
+                                ? false
+                                : true
+                            }
                             size="small"
                             onClick={() => {
                               this.handleExchangePosition(index);
@@ -120,7 +131,7 @@ class SelectedListContainer extends Component {
                             <ArrowDropDownIcon />
                           </Fab>
                         ) : (
-                          ''
+                          ""
                         )}
                         {column.action ? (
                           <Fab
@@ -137,7 +148,7 @@ class SelectedListContainer extends Component {
                             <ArrowDropUpIcon />
                           </Fab>
                         ) : (
-                          ''
+                          ""
                         )}
                       </TableCell>
                     );
@@ -160,7 +171,7 @@ SelectedListContainer.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   selectedListContent: getSelectedListContent(state) || [],
-  listSelected: getPersonalList(state) || [],
+  listSelected: getPersonalList(state),
   selectedIndex: getActualIndex(state) || 0
 });
 

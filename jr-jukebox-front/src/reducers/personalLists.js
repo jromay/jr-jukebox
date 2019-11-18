@@ -34,7 +34,16 @@ export const personalLists = (state = {}, action) => {
     }
     case ADD_PERSONAL_LIST_CONTENT: {
       const song = action.payload;
-      return { ...state, listContent: [...(state.listContent || []), song] };
+      const actualSong = {};
+      if ((state.listContent || []).length === 0) {
+        actualSong.index = 0;
+        actualSong.song = song;
+      }
+      return {
+        ...state,
+        listContent: [...(state.listContent || []), song],
+        ...actualSong
+      };
     }
     case REMOVE_PERSONAL_LIST_CONTENT: {
       const index = action.payload;
@@ -43,7 +52,12 @@ export const personalLists = (state = {}, action) => {
       const final = listIn.slice(index + 1);
       const listContent = [...initial, ...final];
       const newIndex = state.index % listContent.length;
-      return { ...state, listContent, index: newIndex, song: listContent[newIndex] };
+      return {
+        ...state,
+        listContent,
+        index: newIndex,
+        song: listContent[newIndex]
+      };
     }
     case EXCHANGE_POSITIONS: {
       const index = action.payload;
@@ -53,26 +67,42 @@ export const personalLists = (state = {}, action) => {
       const n = listIn[index];
       const n1 = listIn[index + 1];
       let newIndex = state.index;
-      if (state.index == index) {
+      if (state.index === index) {
         newIndex = index + 1;
       }
-      if (state.index == index + 1) {
+      if (state.index === index + 1) {
         newIndex = index;
       }
-      return { ...state, listContent: [...initial, n1, n, ...final], index: newIndex };
+      return {
+        ...state,
+        listContent: [...initial, n1, n, ...final],
+        index: newIndex
+      };
     }
     case SET_ACTUAL_SONG: {
       const index = action.payload;
       return { ...state, song: state.listContent[index], index };
     }
     case NEXT_SONG: {
-      return { ...state, song: state.listContent[(state.index + 1) % state.listContent.length], index: (state.index + 1) % state.listContent.length };
+      return {
+        ...state,
+        song: state.listContent[(state.index + 1) % state.listContent.length],
+        index: (state.index + 1) % state.listContent.length
+      };
     }
     case PREV_SONG: {
       if (state.index === 0) {
-        return { ...state, song: state.listContent[state.list.length - 1], index: state.listContent.length - 1 };
+        return {
+          ...state,
+          song: state.listContent[state.list.length - 1],
+          index: state.listContent.length - 1
+        };
       } else {
-        return { ...state, song: state.listContent[state.index - 1], index: state.index - 1 };
+        return {
+          ...state,
+          song: state.listContent[state.index - 1],
+          index: state.index - 1
+        };
       }
     }
     case SET_NAME_LIST: {
@@ -91,12 +121,12 @@ export const getPersonalLists = createSelector(
 
 export const getActualSong = createSelector(
   state => state.song,
-  song => song || { file: '' }
+  song => song || { file: "" }
 );
 
 export const getActualList = createSelector(
   state => state.listContent,
-  listContent => listContent
+  listContent => listContent || []
 );
 
 export const getActualIndex = createSelector(

@@ -5,6 +5,7 @@ import {
   ADD_LANGUAGE,
   ADD_LETTER,
   ADD_TAG,
+  NEW_TAG,
   REMOVE_DECADE,
   REMOVE_LANGUAGE,
   REMOVE_LETTER,
@@ -21,15 +22,15 @@ export const filters = (state = {}, action) => {
       const decade = action.payload;
       const { decades, query } = state;
       let newDecades = changeValueActivationElement(decades, decade, true);
-      let newQuery = (query || '') + 'decade=' + decade + '&';
+      let newQuery = (query || "") + "decade=" + decade + "&";
       return { ...state, decades: newDecades, query: newQuery };
     }
     case REMOVE_DECADE: {
       const decade = action.payload;
       const { decades, query } = state;
       let newDecades = changeValueActivationElement(decades, decade, false);
-      let newQuery = (query || '').replace('decade=' + decade + '&', '');
-      return { ...state, decades: newDecades, query, query: newQuery };
+      let newQuery = (query || "").replace("decade=" + decade + "&", "");
+      return { ...state, decades: newDecades, query: newQuery };
     }
     case SET_DECADES: {
       const decades = action.payload;
@@ -43,15 +44,15 @@ export const filters = (state = {}, action) => {
       const letter = action.payload;
       const { letters, query } = state;
       let newLetters = changeValueActivationElement(letters, letter, true);
-      let newQuery = (query || '') + 'initialTitle=' + letter + '&';
+      let newQuery = (query || "") + "initialTitle=" + letter + "&";
       return { ...state, letters: newLetters, query: newQuery };
     }
     case REMOVE_LETTER: {
       const letter = action.payload;
       const { letters, query } = state;
-      let newQuery = (query || '').replace('initialTitle=' + letter + '&', '');
+      let newQuery = (query || "").replace("initialTitle=" + letter + "&", "");
       let newLetters = changeValueActivationElement(letters, letter, false);
-      return { ...state, letters: newLetters, query, query: newQuery };
+      return { ...state, letters: newLetters, query: newQuery };
     }
     case SET_LETTERS: {
       const letters = action.payload;
@@ -65,15 +66,15 @@ export const filters = (state = {}, action) => {
       const tag = action.payload;
       const { tags, query } = state;
       let newTags = changeValueActivationElement(tags, tag, true);
-      let newQuery = (query || '') + 'tags=' + tag + '&';
+      let newQuery = (query || "") + "tags=" + tag + "&";
       return { ...state, tags: newTags, query: newQuery };
     }
     case REMOVE_TAG: {
       const tag = action.payload;
       const { tags, query } = state;
       let newTags = changeValueActivationElement(tags, tag, false);
-      let newQuery = (query || '').replace('tags=' + tag + '&', '');
-      return { ...state, tags: newTags, query, query: newQuery };
+      let newQuery = (query || "").replace("tags=" + tag + "&", "");
+      return { ...state, tags: newTags, query: newQuery };
     }
     case SET_TAGS: {
       const tags = action.payload;
@@ -82,20 +83,32 @@ export const filters = (state = {}, action) => {
       });
       return { ...state, tags: tags };
     }
+    case NEW_TAG: {
+      const tag = { selected: false, name: action.payload };
+      return { ...state, tags: [...state.tags, tag] };
+    }
 
     case ADD_LANGUAGE: {
       const language = action.payload;
       const { languages, query } = state;
-      let newLanguages = changeValueActivationElement(languages, language, true);
-      let newQuery = (query || '') + 'language=' + language + '&';
+      let newLanguages = changeValueActivationElement(
+        languages,
+        language,
+        true
+      );
+      let newQuery = (query || "") + "language=" + language + "&";
       return { ...state, languages: newLanguages, query: newQuery };
     }
     case REMOVE_LANGUAGE: {
       const language = action.payload;
       const { languages, query } = state;
-      let newLanguages = changeValueActivationElement(languages, language, false);
-      let newQuery = (query || '').replace('language=' + language + '&', '');
-      return { ...state, languages: newLanguages, query, query: newQuery };
+      let newLanguages = changeValueActivationElement(
+        languages,
+        language,
+        false
+      );
+      let newQuery = (query || "").replace("language=" + language + "&", "");
+      return { ...state, languages: newLanguages, query: newQuery };
     }
     case SET_LANGUAGES: {
       const languages = action.payload;
