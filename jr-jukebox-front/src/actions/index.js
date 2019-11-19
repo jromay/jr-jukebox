@@ -18,6 +18,8 @@ export const ADD_LANGUAGE = "ADD_LANGUAGE";
 export const REMOVE_LANGUAGE = "REMOVE_LANGUAGE";
 export const SET_LANGUAGES = "SET_LANGUAGES";
 
+export const SET_ORDER = "SET_ORDER";
+
 // Play list
 export const SET_PLAY_LIST = "SET_PLAY_LIST";
 export const SET_ACTUAL_SONG = "SET_ACTUAL_SONG";
@@ -71,6 +73,10 @@ const addLanguage = payload => ({ type: ADD_LANGUAGE, payload });
 const removeLanguage = payload => ({ type: REMOVE_LANGUAGE, payload });
 export const setLanguages = payload => {
   return { type: SET_LANGUAGES, payload };
+};
+
+export const setOrder = payload => {
+  return { type: SET_ORDER, payload };
 };
 
 export const setActualSong = payload => ({ type: SET_ACTUAL_SONG, payload });

@@ -9,8 +9,8 @@ export const filteredList = (state = {}, action) => {
       return { ...state, list: list };
     }
     case ADD_FILTERED_LIST: {
-      const list = action.payload;
-      return { ...state, list: [...state.list, ...list] };
+      const list2 = action.payload;
+      return { ...state, list: [...state.list, ...list2] };
     }
     default:
       return state;

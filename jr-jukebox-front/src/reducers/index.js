@@ -3,7 +3,14 @@ import { createSelector } from 'reselect';
 
 import { DECADES, LANGUAGES, LETTERS, TAGS } from './../constants';
 import { filteredList, getFilteredList as _getFilteredList } from './filteredList';
-import { filters, getDecades as _getDecades, getLanguages as _getLanguages, getLetters as _getLetters, getTags as _getTags } from './filters';
+import {
+  filters,
+  getDecades as _getDecades,
+  getLanguages as _getLanguages,
+  getLetters as _getLetters,
+  getOrder as _getOrder,
+  getTags as _getTags
+} from './filters';
 import {
   getActualIndex as _getActualIndex,
   getActualList as _getActualList,
@@ -64,6 +71,8 @@ export const getLanguages = createSelector(
   state => state.filters,
   _getLanguages
 );
+
+export const getOrder = createSelector(state => state.filters, _getOrder);
 
 export const getOptions = state => {
   const tags = TAGS;

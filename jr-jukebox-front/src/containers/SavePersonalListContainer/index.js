@@ -1,6 +1,5 @@
 import Fab from '@material-ui/core/Fab';
 import FormControl from '@material-ui/core/FormControl';
-import IconButton from '@material-ui/core/IconButton';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import SaveIcon from '@material-ui/icons/Save';
@@ -24,12 +23,7 @@ class SavePersonalListContainer extends Component {
   };
 
   handleSave = () => {
-    const {
-      listContent,
-      nameList,
-      setPersonalList,
-      setMessageStatus
-    } = this.props;
+    const { listContent, nameList, setPersonalList } = this.props;
     let arraySongs = [];
     listContent.map(song => {
       arraySongs.push(song._id);

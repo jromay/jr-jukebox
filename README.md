@@ -55,4 +55,4 @@ What will be added to it shortly will be:
 
  [Backend](./README-dev.md)
 
- [Frontend](./jr-jukebox/README.md)
+ [Frontend](./jr-jukebox-front/README.md)
